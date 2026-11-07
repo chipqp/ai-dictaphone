@@ -1,11 +1,15 @@
 from faster_whisper import WhisperModel
 from typing import Any
+from functools import lru_cache
 
 
+@lru_cache(maxsize=1)
 def load_model() -> WhisperModel:
+    print("Loading whisper model")
     model_size = "small"
     model = WhisperModel(model_size, device="cpu", compute_type="int8")
     return model
+
 
 def transcribe_audio(audio_path: str) -> dict[str, Any]:
     model = load_model()
@@ -32,6 +36,7 @@ def transcribe_audio(audio_path: str) -> dict[str, Any]:
     }
 
     return transcription
+
 
 if __name__ == "__main__":
     text = transcribe_audio("app/services/transcription/audio.m4a")

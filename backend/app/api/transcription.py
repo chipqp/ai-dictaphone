@@ -4,13 +4,14 @@ from tempfile import TemporaryDirectory
 from pathlib import Path
 from starlette.concurrency import run_in_threadpool
 from app.services.transcription.whisper_service import transcribe_audio
+from app.schemas.transcription import TranscriptionResponse
 
 
 CHUNK_SIZE = 1024 * 1024
 
 router = APIRouter(prefix="/transcriptions")
 
-@router.post("/")
+@router.post("/", response_model=TranscriptionResponse)
 async def create_transcription(file: UploadFile):
     await validate_audio_file(file)
 
