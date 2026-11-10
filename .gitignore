@@ -222,4 +222,4 @@ __marimo__/
 # Test audio recordings
 backend/app/services/transcription/*.m4a
 backend/app/services/transcription/*.mp3
-backend/app/services/transcription/*.wav
+backend/app/services/transcription/*.wav.DS_Store
